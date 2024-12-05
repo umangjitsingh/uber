@@ -25,14 +25,16 @@ userSchema.methods.generateAuthToken = function () {
     const token = jwt.sign({_id: this._id}, process.env.JWT_SECRET);
     return token;
 }
-userSchema.methods.comparePassword=async function (password){
-    return await bcrypt.compare(password,this.password)
+userSchema.methods.comparePassword=async function (p){
+    return await bcrypt.compare(p,this.password)
 }
-userSchema.statics.hashPassword = async function (password) {
-    return await bcrypt.hash(password,10);
+userSchema.statics.hashPassword = async function (p) {
+    return await bcrypt.hash(p,10);
 }
 
 const userModel= mongoose.model('User',userSchema)
+
 export default userModel;
+export const {hashPassword,generateAuthToken}=userModel;
 
 
