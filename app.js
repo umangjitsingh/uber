@@ -5,7 +5,8 @@ import express from 'express';
 import cors from 'cors';
 import connectDB from './db/db.js';
 import userRoutes from "./routes/user.routes.js";
-import cookieParser from 'cookie-parser'
+import captainRoutes from "./routes/captain.routes.js";
+import cookieParser from 'cookie-parser';
 
 connectDB()
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.urlencoded({extended:true}));
 app.use(cookieParser())
 
 app.get('/',(req,res)=>res.send("hi uber"))
-app.use('/users',userRoutes)
+app.use('/users',userRoutes);
+app.use('/captain',captainRoutes);
 
 export default app;
